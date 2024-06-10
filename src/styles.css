@@ -1,0 +1,74 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+/* MovieCard.css */
+.movie-card {
+  display: flex;
+  border: 2px solid #ddd; /* Ensure border is visible */
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 300px; /* Adjusted width for side by side alignment */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  align-items: flex-start; /* Align items to the top */
+}
+
+/* MovieCard.css */
+.movie-details-left {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  width: 150px; /* Set the width */
+  height: 150px; /* Set the height */
+}
+
+.movie-image {
+  width: 100px; /* Adjusted width for side by side alignment */
+  height: auto;
+  border: 2px solid #ddd; /* Ensure border is visible */
+  border-radius: 8px;
+  margin-right: 16px; /* Space between image and details */
+}
+
+.movie-details-right {
+  display: flex;
+  flex-direction: column; /* Align children vertically */
+  justify-content: flex-start; /* Align to the top */
+}
+
+.movie-name {
+  display: inline-block;
+  margin: 0;
+}
+
+.movie-genre,
+.movie-year {
+  margin: 0;
+}
+
+.movie-genre,
+.movie-year,
+.movie-plot {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.movie-btn {
+  background-color: #007bff; /* Primary blue color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+}
+
+.movie-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.movie-btn:active {
+  background-color: #004080; /* Even darker blue on click */
+}

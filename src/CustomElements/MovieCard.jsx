@@ -1,0 +1,23 @@
+import "../styles.css";
+import React from "react";
+
+export default function MovieCard({ id, imageURL, name, genre, year, plot }) {
+  const truncatedName = name.length > 13 ? `${name.substring(0, 13)}...` : name;
+  const truncatedPlot = plot.length > 40 ? `${plot.substring(0, 40)}...` : plot;
+  return (
+    <div className="movie-card">
+      <div className="movie-details-left">
+        <img src={imageURL} alt={`${name} poster`} className="movie-image" />
+      </div>
+      <div className="movie-details-right">
+        <h2 className="movie-name">{truncatedName}</h2>
+        <p className="movie-genre">Genre : {genre}</p>
+        <p className="movie-year">Year Of Release : {year}</p>
+        <p className="movie-plot">Plot : {truncatedPlot} </p>
+        <a href={`/movies/${id}`}>
+          <button className="movie-btn">View Movie</button>
+        </a>
+      </div>
+    </div>
+  );
+}
