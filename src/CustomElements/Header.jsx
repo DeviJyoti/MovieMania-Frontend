@@ -2,7 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { Navigate } from 'react-router-dom';
 import '../styles.css';
-import './AddActor';
+import '../components/AddActor';
+import '../components/AddProducer';
+import '../components/AddGenre';
 import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from "../TokenHandlers";
 
 const Header = () => {
@@ -52,9 +54,9 @@ const Header = () => {
                         <button className="header-dropbtn">Menu</button>
                         <div className="header-dropdown-content">
                         <a href="#movies">Add New Movie</a>
-                        <a href="./AddActor">Add Actors</a>
-                        <a href="./AddProducer">Add Producers</a>
-                        <a href="./AddGenre">Add Genres</a>
+                        <a href="/AddActor">Add Actors</a>
+                        <a href="/AddProducer">Add Producers</a>
+                        <a href="/AddGenre">Add Genres</a>
                         <a href="#movies">View Movies</a>
                         <a href="#actors">View Actors</a>
                         <a href="#producer">View Producers</a>
