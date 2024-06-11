@@ -1,3 +1,23 @@
+/* Apply Roboto font to the entire application */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #333;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+p {
+  font-weight: 400;
+  line-height: 1.6;
+}
+
 .App {
   font-family: sans-serif;
   text-align: center;
@@ -20,15 +40,23 @@
   padding: 16px; /* Adjust the padding as needed */
 }
 /* MovieCard.css */
-.movie-card {
+.movie-card{
   margin-left: 10px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   border: 2px solid #ddd; /* Ensure border is visible */
   border-radius: 8px;
-  padding: 16px;
-  max-width: 300px; /* Adjusted width for side by side alignment */
+  max-width: 350px; /* Adjusted width for side by side alignment */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card-box {
+  display: flex;
+  padding: 16px;
+  max-width: 350px; /* Adjusted width for side by side alignment */
   align-items: flex-start; /* Align items to the top */
+  height: 150px;
 }
 
 .movie-details-left {
@@ -71,6 +99,9 @@
 }
 
 .movie-btn {
+  text-align: center;
+  margin: 10px;
+  margin-bottom: 20px;
   background-color: #007bff; /* Primary blue color */
   color: white;
   border: none;
@@ -204,8 +235,8 @@
   font-weight: bold;
 }
 
-.header-center .header-search {
-  width: 400px;
+.header-search {
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: none;
@@ -295,7 +326,104 @@
   font-weight: bold;
 }
 
+/* Movie Details */
+
+.movie-container {
+  max-width: 80vw;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.movie-details {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 
+.movie-poster {
+  width: 300px;
+  height: auto;
+  object-fit:contain; /* Ensures the aspect ratio is maintained */
+  border-radius: 8px;
+  align-self: flex-start; /* Align the image to the top of the container */
+}
+
+.movie-info {
+  flex: 1;
+}
+
+.genre-container, .persons-container, .reviews-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.genre-badge {
+  background-color: #e0e0e0;
+  padding: 4px 8px;
+  border-radius: 16px;
+  margin: 4px 0;
+  font-weight: 500;
+}
+
+.person-card, .review-card {
+  background-color: #f9f9f9;
+  padding: 8px;
+  border-radius: 8px;
+  margin: 8px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.person-card {
+  width: 80%;
+}
+
+.review-card {
+  width: 100%;
+}
+
+.review-form {
+  margin-top: 16px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.review-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.review-form button:hover {
+  background-color: #0056b3;
+}
 
 

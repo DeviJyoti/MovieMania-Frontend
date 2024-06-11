@@ -40,7 +40,7 @@ const Header = () => {
     return (
         <header className="header">
             <div className="header-left">
-                <a href="/" className="header-title">Movie Mania</a>
+                <a href="/" className="header-title">MovieMania</a>
             </div>
             <div className="header-center">
                 <input type="text" className="header-search" placeholder="Search movies..." />

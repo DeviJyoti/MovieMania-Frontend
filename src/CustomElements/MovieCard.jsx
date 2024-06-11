@@ -6,6 +6,7 @@ export default function MovieCard({ id, imageURL, name, genres=[], year, plot })
   const truncatedPlot = plot.length > 40 ? `${plot.substring(0, 40)}...` : plot;
   return (
     <div className="movie-card">
+    <div className="movie-card-box">
       <div className="movie-details-left">
         <img src={imageURL} alt={`${name} poster`} className="movie-image" />
       </div>
@@ -14,10 +15,11 @@ export default function MovieCard({ id, imageURL, name, genres=[], year, plot })
         <p className="movie-genre">Genres : {genres && genres.length > 0 ? genres.map(g => g.name).join(", ") : "N/A"}</p>
         <p className="movie-year">Year Of Release : {year}</p>
         <p className="movie-plot">Plot : {truncatedPlot} </p>
-        <a href={`/movies/${id}`}>
+      </div>
+    </div>
+          <a href={`/movies/${id}`}>
           <button className="movie-btn">View Movie</button>
         </a>
-      </div>
     </div>
   );
 }
