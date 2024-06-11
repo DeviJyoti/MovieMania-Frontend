@@ -1,19 +1,40 @@
 // src/Header.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import { Navigate } from 'react-router-dom';
 import '../styles.css';
+import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from "../TokenHandlers";
 
 const Header = () => {
-    const [user, setUser] = useState(null);
-
+    const [userDetails, setUserDetails] = useState(null);
+    const [isTokenExpired, setIsTokenExpired] = useState(false);
+    const [redirectToLogin, setRedirectToLogin] = useState(false);
+    useEffect(() => {
+  
+        if (checkIsTokenExpired()) 
+        {
+            setIsTokenExpired(true);
+        }
+        else
+        {
+            setUserDetails({
+                name: localStorage.getItem('user'),
+                role: localStorage.getItem('userRole'),
+                token: localStorage.getItem('token')
+            });
+        }
+      }, []); // Empty dependency array means this effect runs only once on mount
+    
     const handleLogin = () => {
-        // Simulate a role check from a web API
-        const userRole = prompt("Enter user role (admin/user):"); // For demonstration, replace with actual API call
-        const isAdmin = userRole === 'admin';
-        setUser({ name: 'John Doe', role: userRole, isAdmin });
+        setRedirectToLogin(true);
     };
 
+    if(redirectToLogin)
+    {
+        return <Navigate to="/login"/>
+    }
     const handleLogout = () => {
-        setUser(null);
+        localStorage.clear();
+        setUserDetails(null);
     };
 
     return (
@@ -25,7 +46,7 @@ const Header = () => {
                 <input type="text" className="header-search" placeholder="Search movies..." />
             </div>
             <div className="header-right">
-                {user && user.isAdmin && (
+                {userDetails && userDetails.role=="Admin" && (
                     <div className="header-dropdown">
                         <button className="header-dropbtn">Menu</button>
                         <div className="header-dropdown-content">
@@ -40,9 +61,9 @@ const Header = () => {
                         </div>
                     </div>
                 )}
-                {user ? (
+                {userDetails ? (
                     <div className="header-user">
-                        <span className="header-username">{user.name}</span>
+                        <span className="header-username">{userDetails.name}</span>
                         <button className="header-logout" onClick={handleLogout}>Logout</button>
                     </div>
                 ) : (

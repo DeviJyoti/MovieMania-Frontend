@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "../CustomElements/MovieCard";
 import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from "../TokenHandlers";
+import Header from "../CustomElements/Header";
 
 export default function Home() {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -68,6 +69,7 @@ export default function Home() {
   if (!allMovies || allMovies.length === 0) {
     return (
       <div>
+        <Header/>
         <h1>Loading... Please Wait </h1>
       </div>
     );
@@ -75,7 +77,7 @@ export default function Home() {
 
   return (
     <div>
-      <h1>I am Home page</h1>
+      <Header/>
       <pre>
         {info}
       </pre>

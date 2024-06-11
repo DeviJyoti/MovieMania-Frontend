@@ -5,12 +5,11 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import MovieDetails from "./components/MovieDetails";
-import Header from "./CustomElements/Header";
+
 export default function App() {
   return (
     <Router>
       <div>
-        <Header/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
