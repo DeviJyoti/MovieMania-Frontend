@@ -1,7 +1,7 @@
 import "../styles.css";
 import React from "react";
 
-export default function MovieCard({ id, imageURL, name, genre, year, plot }) {
+export default function MovieCard({ id, imageURL, name, genres=[], year, plot }) {
   const truncatedName = name.length > 13 ? `${name.substring(0, 13)}...` : name;
   const truncatedPlot = plot.length > 40 ? `${plot.substring(0, 40)}...` : plot;
   return (
@@ -11,7 +11,7 @@ export default function MovieCard({ id, imageURL, name, genre, year, plot }) {
       </div>
       <div className="movie-details-right">
         <h2 className="movie-name">{truncatedName}</h2>
-        <p className="movie-genre">Genre : {genre}</p>
+        <p className="movie-genre">Genres : {genres && genres.length > 0 ? genres.map(g => g.name).join(", ") : "N/A"}</p>
         <p className="movie-year">Year Of Release : {year}</p>
         <p className="movie-plot">Plot : {truncatedPlot} </p>
         <a href={`/movies/${id}`}>

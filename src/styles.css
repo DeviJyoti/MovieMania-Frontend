@@ -2,9 +2,26 @@
   font-family: sans-serif;
   text-align: center;
 }
+/* Home CSS */
 
+.wrapper {
+  width:90%;
+  margin-left: 5%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.movie-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 46px; /* Adjust the gap between cards */
+  justify-content: flex-start; /* Align items to the start */
+  padding: 16px; /* Adjust the padding as needed */
+}
 /* MovieCard.css */
 .movie-card {
+  margin-left: 10px;
   display: flex;
   border: 2px solid #ddd; /* Ensure border is visible */
   border-radius: 8px;
@@ -14,7 +31,6 @@
   align-items: flex-start; /* Align items to the top */
 }
 
-/* MovieCard.css */
 .movie-details-left {
   display: flex;
   justify-content: center; /* Center horizontally */
@@ -178,6 +194,7 @@
   background-color: #1c1c1c;
   color: white;
   font-family: Arial, sans-serif;
+  height:60px;
 }
 
 .header-left .header-title {
@@ -277,3 +294,8 @@
   font-size: 16px;
   font-weight: bold;
 }
+
+
+
+
+

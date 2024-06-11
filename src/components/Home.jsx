@@ -4,9 +4,6 @@ import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from "../TokenHand
 import Header from "../CustomElements/Header";
 
 export default function Home() {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isTokenExpired, setIsTokenExpired] = useState(false);
   const [allMovies, setAllMovies] = useState([]);
   const [info, setInfo] = useState("");
 
@@ -21,80 +18,47 @@ export default function Home() {
         });
 
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          setInfo("There is Some Network Issue")
         }
 
         const data = await response.json();
         setAllMovies(data);
-        console.log('Response:', data);
 
-        let newMessage = "";
-
-        if (checkIsAdmin()) {
-          setIsAdmin(true);
-          newMessage += "\nThe User Is Admin ";
-        } else {
-          newMessage += "\nThe User Is not Admin";
-        }
-
-        if (checkIsLoggedIn()) {
-          setIsLoggedIn(true);
-          newMessage += "\nThe User Is Logged in ";
-        } else {
-          newMessage += "\nThe User Is not Logged in";
-        }
-
-        if (checkIsTokenExpired()) {
-          setIsLoggedIn(false);
-          setIsTokenExpired(true);
-          newMessage += "\nThe Token Is Expired, So User is logged out now ";
-        } else {
-          newMessage += "\nThe Token Is not Expired";
-        }
-
-        setInfo(newMessage);
       } catch (error) {
         console.error('Error:', error);
       }
     };
 
     const loadData = async () => {
-      await fetchData(); // Await the fetchData function call
-      // Other code that depends on the fetched data
+      await fetchData(); 
     };
 
-    loadData(); // Call the loadData function
-  }, []); // Empty dependency array means this effect runs only once on mount
-
-  if (!allMovies || allMovies.length === 0) {
-    return (
-      <div>
-        <Header/>
-        <h1>Loading... Please Wait </h1>
-      </div>
-    );
-  }
+    loadData(); 
+  }, []);
 
   return (
     <div>
-      <Header/>
-      <pre>
-        {info}
-      </pre>
-      {allMovies.map((movie) => (
-        <MovieCard
-          key={movie.id}
-          id={movie.id}
-          name={movie.name}
-          year={movie.yearOfRelease}
-          plot={movie.plot}
-          genre={"Action"} // Assuming genre is hardcoded for simplicity
-          imageURL={movie.coverImage}
-        />
-      ))}
-      <a href="login">Go to login page</a>
-      <br />
-      <a href="signup">Go to signup page</a>
+      <Header />
+      <pre>{info}</pre>
+        {allMovies.length === 0 ? (
+          <h1>No Movies Exist...</h1>
+        ) : (
+          <div className="wrapper">
+          <div className="movie-flex-container">
+            {allMovies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                id={movie.id}
+                name={movie.name}
+                year={movie.yearOfRelease}
+                plot={movie.plot}
+                genres={movie.genres}
+                imageURL={movie.coverImage}
+              />
+            ))}
+          </div>
+        </div>
+        )}
     </div>
   );
 }
