@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MovieCard from "../CustomElements/MovieCard";
 import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from "../TokenHandlers";
 import Header from "../CustomElements/Header";
+import Footer from "../CustomElements/Footer";
 
 export default function Home() {
   const [allMovies, setAllMovies] = useState([]);
@@ -41,7 +42,10 @@ export default function Home() {
       <Header />
       <pre>{info}</pre>
         {allMovies.length === 0 ? (
-          <h1>No Movies Exist...</h1>
+          <div className="wrapper">
+              <h1>No Movies Exist...</h1>
+            </div>
+        
         ) : (
           <div className="wrapper">
           <div className="movie-flex-container">
@@ -59,6 +63,7 @@ export default function Home() {
           </div>
         </div>
         )}
+        <Footer/>
     </div>
   );
 }
