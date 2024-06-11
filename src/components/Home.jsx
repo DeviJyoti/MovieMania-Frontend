@@ -22,6 +22,14 @@ export default function Home() {
   return (
     <div>
       <h1>I am Home page</h1>
+      <MovieCard 
+        id={10} 
+        name={"don"} 
+        year={2019} 
+        plot={"XYZ"} 
+        genre={"action"} 
+        imageURL={"https://imgs.search.brave.com/wzurw5Nz9UrHzkFQ7Snw5Xh4zI5HJlxStP1SLCvbXGs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9jZG4u/Y2luZW1hdGVyaWFs/LmNvbS9wLzI5N3gv/dnU2NnNnZXMvZG9u/LWluZGlhbi1tb3Zp/ZS1wb3N0ZXItbWQu/anBnP3Y"}
+      />
       {allMovies.map((movie) => (
         <h1>Name : {movie.name}</h1>
       ))}
