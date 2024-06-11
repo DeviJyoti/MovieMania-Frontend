@@ -18,30 +18,35 @@ const Header = () => {
 
     return (
         <header className="header">
-            <div className="header__left">
-                <a href="/" className="header__title">Movie Mania</a>
+            <div className="header-left">
+                <a href="/" className="header-title">Movie Mania</a>
             </div>
-            <div className="header__center">
-                <input type="text" className="header__search" placeholder="Search movies..." />
+            <div className="header-center">
+                <input type="text" className="header-search" placeholder="Search movies..." />
             </div>
-            <div className="header__right">
+            <div className="header-right">
                 {user && user.isAdmin && (
-                    <div className="header__dropdown">
-                        <button className="header__dropbtn">Edit</button>
-                        <div className="header__dropdown-content">
-                            <a href="#edit-details">Edit Movie Details</a>
-                            <a href="#add-movie">Add New Movie</a>
-                            <a href="#remove-movie">Remove Movie</a>
+                    <div className="header-dropdown">
+                        <button className="header-dropbtn">Menu</button>
+                        <div className="header-dropdown-content">
+                        <a href="#movies">Add New Movie</a>
+                        <a href="#actors">Add Actors</a>
+                        <a href="#producer">Add Producers</a>
+                        <a href="#genres">Add Genres</a>
+                        <a href="#movies">View Movies</a>
+                        <a href="#actors">View Actors</a>
+                        <a href="#producer">View Producers</a>
+                        <a href="#genres">View Genres</a>
                         </div>
                     </div>
                 )}
                 {user ? (
-                    <div className="header__user">
-                        <span className="header__username">{user.name}</span>
-                        <button className="header__logout" onClick={handleLogout}>Logout</button>
+                    <div className="header-user">
+                        <span className="header-username">{user.name}</span>
+                        <button className="header-logout" onClick={handleLogout}>Logout</button>
                     </div>
                 ) : (
-                    <button className="header__login" onClick={handleLogin}>Login</button>
+                    <button className="header-login" onClick={handleLogin}>Login</button>
                 )}
             </div>
         </header>

@@ -180,14 +180,14 @@
   font-family: Arial, sans-serif;
 }
 
-.header__left .header__title {
+.header-left .header-title {
   font-size: 24px;
   text-decoration: none;
   color: white;
   font-weight: bold;
 }
 
-.header__center .header__search {
+.header-center .header-search {
   width: 400px;
   padding: 10px;
   font-size: 16px;
@@ -196,18 +196,18 @@
   outline: none;
 }
 
-.header__right {
+.header-right {
   display: flex;
   align-items: center;
 }
 
-.header__dropdown {
+.header-dropdown {
   position: relative;
   display: inline-block;
   margin-right: 20px;
 }
 
-.header__dropbtn {
+.header-dropbtn {
   background-color: #333;
   color: white;
   border: none;
@@ -218,11 +218,11 @@
   transition: background-color 0.3s;
 }
 
-.header__dropbtn:hover {
+.header-dropbtn:hover {
   background-color: #555;
 }
 
-.header__dropdown-content {
+.header-dropdown-content {
   display: none;
   position: absolute;
   background-color: #444;
@@ -233,7 +233,7 @@
   overflow: hidden;
 }
 
-.header__dropdown-content a {
+.header-dropdown-content a {
   color: white;
   padding: 12px 16px;
   text-decoration: none;
@@ -241,16 +241,16 @@
   transition: background-color 0.3s;
 }
 
-.header__dropdown-content a:hover {
+.header-dropdown-content a:hover {
   background-color: #555;
 }
 
-.header__dropdown:hover .header__dropdown-content {
+.header-dropdown:hover .header-dropdown-content {
   display: block;
 }
 
-.header__login,
-.header__logout {
+.header-login,
+.header-logout {
   background-color: #333;
   color: white;
   border: none;
@@ -262,17 +262,17 @@
   transition: background-color 0.3s;
 }
 
-.header__login:hover,
-.header__logout:hover {
+.header-login:hover,
+.header-logout:hover {
   background-color: #555;
 }
 
-.header__user {
+.header-user {
   display: flex;
   align-items: center;
 }
 
-.header__username {
+.header-username {
   margin-right: 10px;
   font-size: 16px;
   font-weight: bold;
