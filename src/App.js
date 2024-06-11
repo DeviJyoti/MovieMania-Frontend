@@ -9,7 +9,6 @@ export default function App() {
   return (
     <Router>
       <div>
-        <h1>Hello ji, I am header</h1>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies/:id" element={<MovieDetails />} />
