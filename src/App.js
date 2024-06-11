@@ -8,6 +8,7 @@ import MovieDetails from "./components/MovieDetails";
 import AddActor from "./CustomElements/AddActor";
 import AddProducer from "./CustomElements/AddProducer";
 import AddGenre from "./CustomElements/AddGenre";
+import EditActor from "./components/EditActor"
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           <Route path="/AddActor" element={<AddActor />} />
           <Route path="/AddProducer" element={<AddProducer />} />
           <Route path="/AddGenre" element={<AddGenre />} />
+          <Route path="/EditActor/:id" element={<EditActor />} />
         </Routes>
       </div>
     </Router>

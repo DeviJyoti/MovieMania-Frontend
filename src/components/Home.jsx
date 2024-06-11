@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "../CustomElements/MovieCard";
-import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from "../TokenHandlers";
 import Header from "../CustomElements/Header";
 import Footer from "../CustomElements/Footer";
 

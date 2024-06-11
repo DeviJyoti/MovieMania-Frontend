@@ -2,11 +2,12 @@ import "../styles.css";
 import React, { useState, useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import Header from "../CustomElements/Header";
-import PersonCard from "../CustomElements/PersonCard"; // Import the new PersonCard component
+import ProducerCard from "../CustomElements/ProducerCard"; 
+import ActorCard from "../CustomElements/ActorCard"; 
 import { checkIsTokenExpired } from "../TokenHandlers";
 
 export default function MovieDetails() {
-  const { id } = useParams(); // Destructure the 'id' parameter from the URL
+  const { id } = useParams();
   const [currentMovie, setCurrentMovie] = useState(null);
   const [movieReviews, setMovieReviews] = useState([]);
   const [info, setInfo] = useState("");
@@ -96,6 +97,7 @@ export default function MovieDetails() {
       else{
         alert("Please log in to add review")
         localStorage.clear();
+        window.location.reload(); // Reload the page
       }
     } catch (error) {
       console.error('Error:', error);
@@ -126,8 +128,9 @@ export default function MovieDetails() {
                 <h2>Actors</h2>
                 <div className="persons-container">
                   {currentMovie.actors.map((actor) => (
-                    <PersonCard 
+                    <ActorCard 
                       key={actor.id} 
+                      id={actor.id}
                       name={actor.name} 
                       bio={actor.bio} 
                       dob={actor.dob} 
@@ -136,7 +139,9 @@ export default function MovieDetails() {
                   ))}
                 </div>
                 <h2>Producer</h2>
-                <PersonCard 
+                <ProducerCard 
+                  key={currentMovie.producer.id} 
+                  id={currentMovie.producer.id}
                   name={currentMovie.producer.name} 
                   bio={currentMovie.producer.bio} 
                   dob={currentMovie.producer.dob} 
