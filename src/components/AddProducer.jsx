@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from "../CustomElements/Header";
 import '../styles.css';
+import { checkIsTokenExpired } from '../TokenHandlers';
 
 const ProducerForm = () => {
   const [name, setName] = useState('');
@@ -10,35 +11,62 @@ const ProducerForm = () => {
   const [bio, setBio] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
+  
     if (name.length > 50) {
-      alert('Name must be 50 characters or less');
-      return;
-    }
-
-    if (bio.length > 500) {
-      alert('Bio must be 500 characters or less');
-      return;
-    }
-
+        alert('Name must be 50 characters or less');
+        return;
+      }
+  
+      if (bio.length > 500) {
+        alert('Bio must be 500 characters or less');
+        return;
+      }
+    // Create a new actor object
     const newProducer = {
-      name,
-      dob,
-      gender,
-      bio,
+      Name : name,
+      DOB : dob,
+      Gender : gender,
+      Bio : bio,
     };
 
-    console.log('Producer added:', newProducer);
+    try {
+        if(!checkIsTokenExpired())
+        {
+          const token = localStorage.getItem('token');
+          const response = await fetch('http://moviemania.runasp.net/producers', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify(newProducer)
+          });
+          
+          if (!response.ok) {
+            alert("Producer Not added!!")
+          }
+          else
+          {
+            alert("Producer added successfully!!")
+            window.location.reload(); // Reload the page
+          }
+        }
+        else{
+          alert("Please log in to add Producer")
+          localStorage.clear();
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
 
+    // Clear the form fields
     setName('');
     setDob('');
     setGender('');
     setBio('');
-
-    alert('Producer added successfully!');
-    navigate('/producers');
   };
 
   return (
@@ -73,9 +101,9 @@ const ProducerForm = () => {
             required
           >
             <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="non-binar">Non-Binary</option>
           </select>
         </div>
         <div className="form-group">

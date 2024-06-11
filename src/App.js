@@ -5,9 +5,9 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Signup from "./components/Signup";
 import MovieDetails from "./components/MovieDetails";
-import AddActor from "./CustomElements/AddActor";
-import AddProducer from "./CustomElements/AddProducer";
-import AddGenre from "./CustomElements/AddGenre";
+import AddActor from "./components/AddActor";
+import AddProducer from "./components/AddProducer";
+import AddGenre from "./components/AddGenre";
 
 export default function App() {
   return (

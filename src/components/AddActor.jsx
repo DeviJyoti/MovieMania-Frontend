@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from "../CustomElements/Header";
 import '../styles.css';
-
+import { checkIsTokenExpired } from '../TokenHandlers';
 const ActorForm = () => {
   const [name, setName] = useState('');
   const [dob, setDob] = useState('');
@@ -10,7 +10,7 @@ const ActorForm = () => {
   const [bio, setBio] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (name.length > 50) {
@@ -30,20 +30,41 @@ const ActorForm = () => {
       Bio : bio,
     };
 
-    // Normally, you would send the newActor object to your server here.
-    console.log('Actor added:', newActor);
+    try {
+        if(!checkIsTokenExpired())
+        {
+          const token = localStorage.getItem('token');
+          const response = await fetch('http://moviemania.runasp.net/actors', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}` 
+            },
+            body: JSON.stringify(newActor)
+          });
+          
+          if (!response.ok) {
+            alert("Actor Not added!!")
+          }
+          else
+          {
+            alert("Actor added successfully!!")
+            window.location.reload(); // Reload the page
+          }
+        }
+        else{
+          alert("Please log in to add actor")
+          localStorage.clear();
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
 
     // Clear the form fields
     setName('');
     setDob('');
     setGender('');
     setBio('');
-
-    // Notify the user
-    alert('Actor added successfully!');
-
-    // Redirect to another page, e.g., actors list
-    navigate('/actors');
   };
 
   return (
