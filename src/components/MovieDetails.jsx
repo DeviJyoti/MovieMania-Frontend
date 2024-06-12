@@ -13,7 +13,9 @@ export default function MovieDetails() {
   const [info, setInfo] = useState("");
   const [reviewMessage, setReviewMessage] = useState("");
   const [redirectToHome, setRedirectToHome] = useState(false);
+  const [reloadData, setReloadData] = useState(false)
   useEffect(() => {
+    setReloadData(false);
     const fetchMovie = async () => {
       try {
         const response = await fetch(`https://moviemania.runasp.net/movies/${id}`, {
@@ -62,7 +64,7 @@ export default function MovieDetails() {
     };
 
     loadMovie();
-  }, [id]); 
+  }, [reloadData]); 
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
@@ -85,14 +87,14 @@ export default function MovieDetails() {
         else
         {
           alert("Review added successfully!!")
-          window.location.reload(); // Reload the page
+          setReloadData(true);
         }
         setReviewMessage("");
       }
       else{
         alert("Please log in to add review")
         localStorage.clear();
-        window.location.reload(); // Reload the page
+        setReloadData(true);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -149,7 +151,7 @@ export default function MovieDetails() {
           <p>Loading movie details...</p>
         )}
         <h2>Reviews</h2>
-        {movieReviews.length > 0 ? (
+        {movieReviews.length > 0 && !checkIsTokenExpired()? (
           <div className="reviews-container">
             {movieReviews.map((review) => (
               <div key={review.id} className="review-card">
@@ -158,7 +160,7 @@ export default function MovieDetails() {
             ))}
           </div>
         ) : (
-          <p>No reviews available.</p>
+          <p>Login to see reviews</p>
         )}
         
         <h2>Add a Review</h2>

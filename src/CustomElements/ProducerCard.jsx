@@ -37,7 +37,7 @@ export default function PersonCard({ id,name, bio, dob, gender }) {
           else
           {
             alert("Producer Deleted successfully!!")
-            window.location.reload(); // Reload the page
+            return <Navigate to="/Producers"/>
           }
       } catch (error) {
         console.error('Error:', error);

@@ -40,7 +40,7 @@ const Header = () => {
     const handleLogout = () => {
         localStorage.clear();
         setUserDetails(null);
-        window.location.reload(); 
+        return <Navigate to="/"/>
     };
 
     return (

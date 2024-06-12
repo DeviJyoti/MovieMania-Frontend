@@ -39,7 +39,7 @@ export default function PersonCard({ id,name, bio, dob, gender }) {
           else
           {
             alert("Actor Deleted successfully!!")
-            window.location.reload(); // Reload the page
+            return <Navigate to="/Actors"/>
           }
       } catch (error) {
         console.error('Error:', error);
@@ -48,6 +48,7 @@ export default function PersonCard({ id,name, bio, dob, gender }) {
     else
     {
       alert("You are not admin")
+      return <Navigate to="/"/>
     }
   }
 
