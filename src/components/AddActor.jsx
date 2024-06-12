@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from "../CustomElements/Header";
 import '../styles.css';
 import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from '../TokenHandlers';
+import { Navigate,Link } from 'react-router-dom';
 
 export default function AddActor() {
   const [name, setName] = useState('');

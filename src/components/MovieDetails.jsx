@@ -1,6 +1,6 @@
 import "../styles.css";
 import React, { useState, useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate,Link, useParams } from "react-router-dom";
 import Header from "../CustomElements/Header";
 import ProducerCard from "../CustomElements/ProducerCard"; 
 import ActorCard from "../CustomElements/ActorCard"; 

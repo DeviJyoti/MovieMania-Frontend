@@ -2,6 +2,7 @@ import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from "../CustomElements/Header";
 import '../styles.css';
+import { Navigate,Link } from 'react-router-dom';
 import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from '../TokenHandlers';
 
 export default function AddActor() {

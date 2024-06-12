@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { checkIsAdmin,checkIsTokenExpired } from "../TokenHandlers";
-import { Navigate } from 'react-router-dom';
-
+import { Navigate,Link, useParams } from "react-router-dom";
 export default function PersonCard({ id,name, bio, dob, gender }) {
   const [redirectToEditProducer,setRedirectToEditProducer] = useState(false);
   useEffect(()=>{
