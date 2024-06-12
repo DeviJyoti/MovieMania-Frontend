@@ -17,6 +17,7 @@ const ActorsList = () => {
           const response = await fetch('http://moviemania.runasp.net/actors', {
             method: 'GET',
             headers: {
+              'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`
             }
           });
@@ -31,7 +32,6 @@ const ActorsList = () => {
         } else {
           alert("Please log in to view actors");
           localStorage.clear();
-          navigate('/login');
         }
       } catch (error) {
         console.error('Error fetching actors:', error);
@@ -41,20 +41,10 @@ const ActorsList = () => {
     fetchActors();
   }, []);
 
-  const handleEdit = (id) => {
-    // Implement edit functionality
-    console.log(`Edit actor with id: ${id}`);
-  };
-
-  const handleDelete = (id) => {
-    // Implement delete functionality
-    console.log(`Delete actor with id: ${id}`);
-  };
-
   return (
     <div>
     <Header />
-    <h2>Actors List</h2>
+    <h2 style={{textAlign:'center'}}>Actors List</h2>
     <div className="actors-list-container">
         {actors.length === 0 ? (
           <p>No actors found.</p>

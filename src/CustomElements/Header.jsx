@@ -35,7 +35,7 @@ const Header = () => {
 
     if(redirectToLogin)
     {
-        return <Navigate to="/login"/>
+        return <Navigate to="/Login"/>
     }
     const handleLogout = () => {
         localStorage.clear();
@@ -55,14 +55,14 @@ const Header = () => {
                     <div className="header-dropdown">
                         <button className="header-dropbtn">Menu</button>
                         <div className="header-dropdown-content">
-                        <a href="#movies">Add New Movie</a>
-                        <a href="/AddActor">Add Actors</a>
-                        <a href="/AddProducer">Add Producers</a>
-                        <a href="/AddGenre">Add Genres</a>
-                        <a href="#movies">View Movies</a>
-                        <a href="/ViewActors">View Actors</a>
-                        <a href="/ViewProducers">View Producers</a>
-                        <a href="#genres">View Genres</a>
+                        <a href="/movies/Add">Add New Movie</a>
+                        <a href="/Actors/Add">Add Actors</a>
+                        <a href="/Producers/Add">Add Producers</a>
+                        <a href="/Genres/Add">Add Genres</a>
+                        <a href="/">View Movies</a>
+                        <a href="/Actors">View Actors</a>
+                        <a href="/Producers">View Producers</a>
+                        <a href="/Genres">View Genres</a>
                         </div>
                     </div>
                 )}

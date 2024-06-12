@@ -18,16 +18,16 @@ export default function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/movies/:id" element={<MovieDetails />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/AddActor" element={<AddActor />} />
-          <Route path="/AddProducer" element={<AddProducer />} />
-          <Route path="/AddGenre" element={<AddGenre />} />
-          <Route path="/EditActor/:id" element={<EditActor />} />
-          <Route path="/EditProducer/:id" element={<EditProducer />} />
-          <Route path="/ViewActors" element={<ViewActors />} />
-          <Route path="/ViewProducers" element={<ViewProducers />} />
+          <Route path="/Movies/:id" element={<MovieDetails />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/Actors/Add" element={<AddActor />} />
+          <Route path="/Producers/Add" element={<AddProducer />} />
+          <Route path="/Genres/Add" element={<AddGenre />} />
+          <Route path="/Actors/:id/Edit" element={<EditActor />} />
+          <Route path="/Producers/:id/Edit" element={<EditProducer />} />
+          <Route path="/Actors" element={<ViewActors />} />
+          <Route path="/Producers" element={<ViewProducers />} />
         </Routes>
       </div>
     </Router>

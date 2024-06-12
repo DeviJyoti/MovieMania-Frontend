@@ -62,7 +62,7 @@ export default function MovieDetails() {
     };
 
     loadMovie();
-  }, [id]); // Add 'id' as a dependency to re-run when 'id' changes
+  }, [id]); 
 
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
