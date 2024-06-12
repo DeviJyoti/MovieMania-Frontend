@@ -6,6 +6,7 @@ import '../components/AddActor';
 import '../components/AddProducer';
 import '../components/AddGenre';
 import '../components/ViewActors';
+import '../components/ViewProducers';
 import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from "../TokenHandlers";
 
 const Header = () => {
@@ -60,7 +61,7 @@ const Header = () => {
                         <a href="/AddGenre">Add Genres</a>
                         <a href="#movies">View Movies</a>
                         <a href="/ViewActors">View Actors</a>
-                        <a href="#producer">View Producers</a>
+                        <a href="/ViewProducers">View Producers</a>
                         <a href="#genres">View Genres</a>
                         </div>
                     </div>

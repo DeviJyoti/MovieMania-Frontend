@@ -9,6 +9,7 @@ import AddActor from "./components/AddActor";
 import AddProducer from "./components/AddProducer";
 import AddGenre from "./components/AddGenre";
 import ViewActors from "./components/ViewActors";
+import ViewProducers from "./components/ViewProducers";
 import EditActor from "./components/EditActor"
 import EditProducer from "./components/EditProducer"
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/EditActor/:id" element={<EditActor />} />
           <Route path="/EditProducer/:id" element={<EditProducer />} />
           <Route path="/ViewActors" element={<ViewActors />} />
+          <Route path="/ViewProducers" element={<ViewProducers />} />
         </Routes>
       </div>
     </Router>
