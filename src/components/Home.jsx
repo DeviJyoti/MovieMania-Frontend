@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MovieCard from "../CustomElements/MovieCard";
 import Header from "../CustomElements/Header";
-import Footer from "../CustomElements/Footer";
 import { Navigate,Link } from 'react-router-dom';
 
 export default function Home() {
