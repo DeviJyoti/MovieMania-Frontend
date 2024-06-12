@@ -25,8 +25,8 @@ p {
 /* Home CSS */
 
 .wrapper {
-  width:90%;
-  margin-left: 5%;
+  width:80vw;
+  margin-left: auto;
   margin-top: 40px;
   min-height: 150vh;
   display: flex;
@@ -36,6 +36,8 @@ p {
 .movie-flex-container {
   display: flex;
   flex-wrap: wrap;
+  width:80vw;
+  margin:auto;
   gap: 46px; /* Adjust the gap between cards */
   justify-content: flex-start; /* Align items to the start */
   padding: 16px; /* Adjust the padding as needed */
@@ -216,17 +218,18 @@ p {
 
 /*---------CSS of Header----------*/
 
+
 .header {
-    top: 0;
-    left: 0;
-    width: 80vw;
+    margin: auto;
+    width: 70vw;
+    padding: 10px 6vw; /* Adjust padding as needed */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 10vw;
     background-color: #1c1c1c;
     color: white;
     font-family: Arial, sans-serif;
+    border-radius: 6px;
 }
 
 .header-left .header-title {
@@ -376,7 +379,7 @@ p {
   background-color: #f9f9f9;
   padding: 8px;
   border-radius: 8px;
-  margin: 8px 0;
+  margin: 8px auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -394,6 +397,25 @@ p {
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Edit {
+  background-color: #3498db;
+  color: #fff;
+  width: 100px;
+  margin:0 20px;
+}
+
+.Delete {
+  background-color: #e74c3c;
+  color: #fff;
+  width: 100px;
+  margin:0 20px;
+
+}
+
+.button:hover {
+  background-color: #2c3e50;
 }
 
 .form-group {
@@ -635,50 +657,14 @@ button:hover {
   background-color: #0056b3;
 }
 
-.Edit {
-  background-color: #3498db;
-  color: #fff;
-}
 
-.Delete {
-  background-color: #e74c3c;
-  color: #fff;
-}
-
-.button:hover {
-  background-color: #2c3e50;
-}
 
 /* -----------CSS of View Actors------------ */
 
 .actors-list-container {
-  padding: 20px;
-}
-
-.actors-cards {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
-}
-
-.actor-card {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  width: calc(33.333% - 40px);
-  box-sizing: border-box;
-  margin: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.actor-card h3 {
-  margin: 0 0 10px;
-}
-
-.actor-card p {
-  margin: 5px 0;
 }
 
 .input-group.buttons {
