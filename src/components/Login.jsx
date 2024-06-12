@@ -16,7 +16,7 @@ export default function Login() {
     };
 
     try {
-      const response = await fetch('http://moviemania.runasp.net/authentication/login', 
+      const response = await fetch('https://cors-anywhere.herokuapp.com/http://moviemania.runasp.net/authentication/login', 
       {
         method: 'POST',
         headers: {

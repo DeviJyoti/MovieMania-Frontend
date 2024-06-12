@@ -41,9 +41,9 @@ export default function Home() {
       <Header />
       <pre>{info}</pre>
         {allMovies.length === 0 ? (
-          <div className="wrapper">
-              <h1>No Movies Exist...</h1>
-            </div>
+          <div>
+              <h1 style={{margin:'auto',textAlign:'center', marginTop:'30vh'}}>Loading...</h1>
+          </div>
         
         ) : (
           <div className="movie-flex-container">
