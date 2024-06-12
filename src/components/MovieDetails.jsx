@@ -151,17 +151,22 @@ export default function MovieDetails() {
           <p>Loading movie details...</p>
         )}
         <h2>Reviews</h2>
-        {movieReviews.length > 0 && !checkIsTokenExpired()? (
-          <div className="reviews-container">
-            {movieReviews.map((review) => (
+        {!checkIsTokenExpired() ? (
+        <div className="reviews-container">
+          {movieReviews.length > 0 ? (
+            movieReviews.map((review) => (
               <div key={review.id} className="review-card">
                 <p><strong>{review.userName}:</strong> {review.message}</p>
               </div>
-            ))}
-          </div>
-        ) : (
-          <p>Login to see reviews</p>
-        )}
+            ))
+          ) : (
+            <p style={{textAlign:'centre',margin:'10px auto'}}>No reviews available</p>
+          )}
+        </div>
+      ) : (
+        <p style={{textAlign:'centre',margin:'10px auto'}}>Login to see reviews</p>
+      )}
+
         
         <h2>Add a Review</h2>
         {checkIsTokenExpired()==false?(
@@ -178,7 +183,7 @@ export default function MovieDetails() {
           <button type="submit">Submit Review</button>
         </form>
         ):(
-          <h3>Login to add a review</h3>
+          <p style={{textAlign:'centre',margin:'10px auto'}}>Login to Add reviews</p>
         )}
         
 
