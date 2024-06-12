@@ -17,6 +17,7 @@ const ProducersList = () => {
           const response = await fetch('http://moviemania.runasp.net/producers', {
             method: 'GET',
             headers: {
+              'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`
             }
           });
@@ -31,7 +32,6 @@ const ProducersList = () => {
         } else {
           alert("Please log in to view producers");
           localStorage.clear();
-          navigate('/login');
         }
       } catch (error) {
         console.error('Error fetching producers:', error);
@@ -41,24 +41,12 @@ const ProducersList = () => {
     fetchProducers();
   }, []);
 
-  const handleEdit = (id) => {
-    // Implement edit functionality
-    console.log(`Edit producer with id: ${id}`);
-  };
-
-  const handleDelete = (id) => {
-    // Implement delete functionality
-    console.log(`Delete producer with id: ${id}`);
-  };
-
   return (
     <div>
-    <Header />
+      <Header />
+    <h2 style={{textAlign:'center'}}>Producers List</h2>
     <div className="actors-list-container">
-
-      <h2>Producers List</h2>
-      <div className="actors-cards">
-        {producers.length === 0 ? (
+    {producers.length === 0 ? (
           <p>No producers found.</p>
         ) : (
           producers.map((producer) => (
@@ -73,7 +61,6 @@ const ProducersList = () => {
           ))
         )}
       </div>
-    </div>
     </div>
   );
 };

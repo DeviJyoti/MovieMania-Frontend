@@ -17,7 +17,7 @@ export default function MovieCard({ id, imageURL, name, genres=[], year, plot })
         <p className="movie-plot">Plot : {truncatedPlot} </p>
       </div>
     </div>
-          <a href={`/movies/${id}`}>
+          <a style={{textDecoration:'none'}} href={`/Movies/${id}`}>
           <button className="movie-btn">View Movie</button>
         </a>
     </div>

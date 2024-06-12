@@ -88,7 +88,7 @@ export default function Login() {
         </div>
         {message && <p className="message">{message}</p>}
         <p className="signup-link">
-          Don't have an account? <a href="/signup">Sign up here</a>
+          Don't have an account? <a href="/Signup">Sign up here</a>
         </p>
       </form>
     </div>

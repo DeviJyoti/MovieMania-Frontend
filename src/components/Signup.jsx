@@ -76,7 +76,7 @@ export default function Signup() {
     return <Navigate to="/" />;
   }
   if (redirectToLogin) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/Login" />;
   }
 
   return (
@@ -122,7 +122,7 @@ export default function Signup() {
         </div>
         {message && <p className="message">{message}</p>}
         <p className="signup-link">
-          Already have an account? <a href="/login">Sign in here</a>
+          Already have an account? <a href="/Login">Sign in here</a>
         </p>
       </form>
     </div>

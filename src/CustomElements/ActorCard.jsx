@@ -52,7 +52,7 @@ export default function PersonCard({ id,name, bio, dob, gender }) {
   }
 
   if (redirectToEditActor) {
-    return <Navigate to={`/EditActor/${id}`} />;
+    return <Navigate to={`/Actors/${id}/Edit`} />;
   }
 
   return (

@@ -24,7 +24,7 @@ export default function PersonCard({ id,name, bio, dob, gender }) {
       try {
 
           const token = localStorage.getItem('token');
-          const response = await fetch(`http://moviemania.runasp.net/producer/${id}`, {
+          const response = await fetch(`http://moviemania.runasp.net/producers/${id}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
@@ -51,7 +51,7 @@ export default function PersonCard({ id,name, bio, dob, gender }) {
   }
 
   if (redirectToEditProducer) {
-    return <Navigate to={`/EditProducer/${id}`} />;
+    return <Navigate to={`/Producers/${id}/Edit`} />;
   }
 
   return (
