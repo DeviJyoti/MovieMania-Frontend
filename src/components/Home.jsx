@@ -10,7 +10,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://moviemania.runasp.net/movies', {
+        const response = await fetch('https://moviemania.runasp.net/movies', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
