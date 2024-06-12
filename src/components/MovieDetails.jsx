@@ -150,6 +150,7 @@ export default function MovieDetails() {
         ) : (
           <p>Loading movie details...</p>
         )}
+        <hr />
         <h2>Reviews</h2>
         {!checkIsTokenExpired() ? (
         <div className="reviews-container">
@@ -164,10 +165,12 @@ export default function MovieDetails() {
           )}
         </div>
       ) : (
+        <div className="reviews-container">
         <p style={{textAlign:'centre',margin:'10px auto'}}>Login to see reviews</p>
+        </div>
       )}
 
-        
+        <hr />
         <h2>Add a Review</h2>
         {checkIsTokenExpired()==false?(
           <form onSubmit={handleReviewSubmit} className="review-form">
@@ -183,10 +186,13 @@ export default function MovieDetails() {
           <button type="submit">Submit Review</button>
         </form>
         ):(
-          <p style={{textAlign:'centre',margin:'10px auto'}}>Login to Add reviews</p>
+          <div className="reviews-container">
+            <p style={{textAlign:'centre',margin:'10px auto'}}>Login to Add reviews</p>
+          </div>
+
         )}
         
-
+          <hr />
       </div>
     </div>
   );
