@@ -1,71 +1,101 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from "../CustomElements/Header";
 import '../styles.css';
-import { checkIsAdmin, checkIsTokenExpired } from '../TokenHandlers';
+import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from '../TokenHandlers';
 
-export default function EditActor() {
+export default function AddActor() {
   const {id} = useParams();
   const [name, setName] = useState('');
-  const [dob, setDob] = useState(new Date());
+  const [dob, setDob] = useState('');
   const [gender, setGender] = useState('');
   const [bio, setBio] = useState('');
-  const [actor,setActor] = useState(null);
-  const [message,setMessage] = useState("");
+  const [message,setMessage] = useState('');
+  const [errorMessage,setErrorMessage] = useState('');
+  const [allowAccess, setAllowAccess] = useState(false);
   const navigate = useNavigate();
 
   useEffect(()=>{
+    if(!checkIsLoggedIn())
+    {
+      setErrorMessage("You are not logged in")
+      return;
+    }
+
+    if(checkIsTokenExpired())
+    {
+      setErrorMessage("Your session Expired")
+      return;
+    }
+    if(!checkIsAdmin())
+    {
+      setErrorMessage("You are not admin");
+      return;
+    }
+    const formatDate = (date) => {
+      const d = new Date(date);
+      const year = d.getFullYear();
+      const month = (`0${d.getMonth() + 1}`).slice(-2);
+      const day = (`0${d.getDate()}`).slice(-2);
+      return `${year}-${month}-${day}`;
+    };
     const fetchActor = async()=>{
-        try {
-            if(!checkIsTokenExpired())
-            {
-              const token = localStorage.getItem('token');
-              const response = await fetch(`http://moviemania.runasp.net/actors/${id}`, {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}` 
-                },
-              });
-              
+      try {
+          if(!checkIsTokenExpired())
+          {
+            const token = localStorage.getItem('token');
+            const response = await fetch(`http://moviemania.runasp.net/actors/${id}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` 
+              },
+            });
+            
+            if (response.status === 400) {
+              setErrorMessage('Bad Request');
+            } else if (response.status === 401) {
+              setErrorMessage('Unauthorized');
+            } else if (response.status === 403) {
+              setErrorMessage('Forbidden');
+            } else if (response.status === 404) {
+              setErrorMessage('Not Found');
+            } else if (response.ok) {
+              setAllowAccess(true);           
               const data = await response.json();
-
-              if (!response.ok)
-                setMessage(data);
-              else
-              {
-                setName(data.name);
-                setBio(data.bio);
-                setDob(new Date(data.dob));
-              }
-
+              setName(data.name);
+              setDob(formatDate(data.dob));
+              setGender(data.gender);
+              setBio(data.bio);
             }
-            else{
-              alert("Please log in to add actor")
-              localStorage.clear();
-            }
-          } catch (error) {
-            console.error('Error:', error);
+
           }
+          else{
+            alert("Please log in to add actor")
+            localStorage.clear();
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
     }
 
-    const loadActor = async ()=>{
-        await fetchActor();
+    const loadData= async()=>{
+      await fetchActor();
     }
+    loadData();
+  },[id])
 
-    loadActor();
-  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (name.length > 50) {
-        alert('Name must be 50 characters or less');
+        setMessage('Name must be 50 characters or less');
         return;
       }
   
       if (bio.length > 500) {
-        alert('Bio must be 500 characters or less');
+        setMessage('Bio must be 500 characters or less');
         return;
       }
     // Create a new actor object
@@ -80,7 +110,7 @@ export default function EditActor() {
         if(!checkIsTokenExpired() && checkIsAdmin())
         {
           const token = localStorage.getItem('token');
-          const response = await fetch(`http://moviemania.runasp.net/actors/${id}`, {
+          const response = await fetch('http://moviemania.runasp.net/actors', {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -90,19 +120,19 @@ export default function EditActor() {
           });
           
           if (!response.ok) {
-            alert(response)
+            setMessage(response);
           }
           else
           {
-            alert(response);
+            setMessage(response);
             window.location.reload(); // Reload the page
           }
         }
         else{
           if(!checkIsAdmin())
-            alert("You are not admin")
+            setMessage("You are not admin");
           else
-            alert("Please log in to update actor")
+            setMessage("Please log in to add actor");
 
           localStorage.clear();
         }
@@ -112,56 +142,64 @@ export default function EditActor() {
   };
 
   return (
-    <div className="actor-form-container">
-        <Header/>
-      <h2>Add Actor</h2>
-      <form onSubmit={handleSubmit} className="actor-form">
-        <div className="form-group">
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="dob">Date of Birth:</label>
-          <input
-            type="date"
-            id="dob"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="gender">Gender:</label>
-          <select
-            id="gender"
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
-            required
-          >
-            <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="non-binary">Non-Binary</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label htmlFor="bio">Bio:</label>
-          <textarea
-            id="bio"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="submit-button">Save</button>
-      </form>
+    <div>
+      <Header/>
+      {(checkIsTokenExpired() || !checkIsAdmin()) ? 
+        <h2 style={{ textAlign: 'center' ,position:'relative',top:'30vh'}}>{errorMessage}</h2>
+      :<div className="actor-form-container">
+        <h2>Update Actor:{name}</h2>
+        <form onSubmit={handleSubmit} className="actor-form">
+          <div className="form-group">
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="dob">Date of Birth:</label>
+            <input
+              type="date"
+              id="dob"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="gender">Gender:</label>
+            <select
+              id="gender"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="non-binary">Non-Binary</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="bio">Bio:</label>
+            <textarea
+              id="bio"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              required
+            />
+          </div>
+          <p style={{ textAlign: 'center', color:'red'}}>{message+"!!"}</p>
+      <button type="submit" className="submit-button">Save</button>
+    </form>
+    </div>
+    }
     </div>
   );
 };
+
+
 
