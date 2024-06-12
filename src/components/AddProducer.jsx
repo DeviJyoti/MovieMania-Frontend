@@ -4,7 +4,7 @@ import Header from "../CustomElements/Header";
 import '../styles.css';
 import { checkIsTokenExpired } from '../TokenHandlers';
 
-const ProducerForm = () => {
+export default function AddProducer(){
   const [name, setName] = useState('');
   const [dob, setDob] = useState('');
   const [gender, setGender] = useState('');
@@ -33,7 +33,7 @@ const ProducerForm = () => {
     };
 
     try {
-        if(!checkIsTokenExpired())
+        if(!checkIsTokenExpired() && checkIsAdmin())
         {
           const token = localStorage.getItem('token');
           const response = await fetch('http://moviemania.runasp.net/producers', {
@@ -55,7 +55,11 @@ const ProducerForm = () => {
           }
         }
         else{
-          alert("Please log in to add Producer")
+          if(!checkIsAdmin())
+            alert("You are not admin")
+          else
+            alert("Please log in to add producer")
+
           localStorage.clear();
         }
       } catch (error) {
@@ -121,4 +125,4 @@ const ProducerForm = () => {
   );
 };
 
-export default ProducerForm;
+

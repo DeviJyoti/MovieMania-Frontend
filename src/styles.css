@@ -217,15 +217,13 @@ p {
 /*---------CSS of Header----------*/
 
 .header {
-  position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    z-index: 1000; /* Ensure header is on top of other content */
+    width: 80vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 15px 10vw;
     background-color: #1c1c1c;
     color: white;
     font-family: Arial, sans-serif;

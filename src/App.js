@@ -9,7 +9,7 @@ import AddActor from "./components/AddActor";
 import AddProducer from "./components/AddProducer";
 import AddGenre from "./components/AddGenre";
 import EditActor from "./components/EditActor"
-
+import EditProducer from "./components/EditProducer"
 export default function App() {
   return (
     <Router>
@@ -23,6 +23,7 @@ export default function App() {
           <Route path="/AddProducer" element={<AddProducer />} />
           <Route path="/AddGenre" element={<AddGenre />} />
           <Route path="/EditActor/:id" element={<EditActor />} />
+          <Route path="/EditProducer/:id" element={<EditProducer />} />
         </Routes>
       </div>
     </Router>

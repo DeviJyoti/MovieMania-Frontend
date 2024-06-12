@@ -4,28 +4,25 @@ import Header from "../CustomElements/Header";
 import '../styles.css';
 import { checkIsTokenExpired } from '../TokenHandlers';
 
-const GenreForm = () => {
+export default function AddGenre(){
   const [genreName, setGenreName] = useState('');
   //const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-   
     if (genreName.length > 50) {
         alert('Name must be 50 characters or less');
         return;
       }
   
-      
     // Create a new actor object
     const newGenre = {
      Name:genreName
     };
 
     try {
-        if(!checkIsTokenExpired())
+        if(!checkIsTokenExpired() && checkIsAdmin())
         {
           const token = localStorage.getItem('token');
           const response = await fetch('http://moviemania.runasp.net/genres', {
@@ -47,7 +44,11 @@ const GenreForm = () => {
           }
         }
         else{
-          alert("Please log in to add Genre")
+          if(!checkIsAdmin())
+            alert("You are not admin")
+          else
+            alert("Please log in to add genre")
+
           localStorage.clear();
         }
       } catch (error) {
@@ -79,4 +80,3 @@ const GenreForm = () => {
   );
 };
 
-export default GenreForm;

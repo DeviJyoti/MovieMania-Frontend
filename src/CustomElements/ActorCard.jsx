@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 export default function PersonCard({ id,name, bio, dob, gender }) {
   const [redirectToEditActor,setRedirectToEditActor] = useState(false);
+  const [redirectToLogin,setRedirectLogin] = useState(false);
   useEffect(()=>{
 
   },[]);

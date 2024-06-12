@@ -24,7 +24,7 @@ export default function MovieDetails() {
         });
 
         if (!response.ok) {
-          setInfo("There is Some Network Issue");
+          setInfo("No movie Found");
           return;
         }
 
@@ -47,11 +47,6 @@ export default function MovieDetails() {
               'Authorization': `Bearer ${token}` 
             }
           });
-  
-          if (!response.ok) {
-            setInfo("There is Some Network Issue");
-            return;
-          }
   
           const data = await response.json();
           setMovieReviews(data);
