@@ -12,6 +12,7 @@ import ViewActors from "./components/ViewActors";
 import ViewProducers from "./components/ViewProducers";
 import EditActor from "./components/EditActor"
 import EditProducer from "./components/EditProducer"
+
 export default function App() {
   return (
     <Router>

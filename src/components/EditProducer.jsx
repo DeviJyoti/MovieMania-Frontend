@@ -142,8 +142,7 @@ export default function AddProducer() {
             setMessage("You are not admin");
           else
             setMessage("Please log in to add producer");
-
-          localStorage.clear();
+            localStorage.clear();
         }
       } catch (error) {
         console.error('Error:', error);

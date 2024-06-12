@@ -1,24 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from "../CustomElements/Header";
 import '../styles.css';
-import { checkIsTokenExpired } from '../TokenHandlers';
+import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from '../TokenHandlers';
 
-export default function AddGenre(){
-  const [genreName, setGenreName] = useState('');
-  //const navigate = useNavigate();
+export default function AddActor() {
+  const [name, setName] = useState('');
+  const [dob, setDob] = useState('');
+  const [gender, setGender] = useState('');
+  const [bio, setBio] = useState('');
+  const [message,setMessage] = useState('');
+  const [errorMessage,setErrorMessage] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(!checkIsLoggedIn())
+    {
+      setErrorMessage("You are not logged in")
+      return;
+    }
+
+    if(checkIsTokenExpired())
+    {
+      setErrorMessage("Your session Expired")
+      return;
+    }
+    if(!checkIsAdmin())
+    {
+      setErrorMessage("You are not admin");
+      return;
+    }
+  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (genreName.length > 50) {
-        alert('Name must be 50 characters or less');
+    
+    if (name.length > 50) {
+        setMessage('Name must be 50 characters or less');
         return;
       }
   
+      if (bio.length > 500) {
+        setMessage('Bio must be 500 characters or less');
+        return;
+      }
     // Create a new actor object
     const newGenre = {
-     Name:genreName
+      Name : name,
     };
 
     try {
@@ -35,47 +63,49 @@ export default function AddGenre(){
           });
           
           if (!response.ok) {
-            alert("Genre Not added!!")
+            setMessage("Genre Not added!!");
           }
           else
           {
-            alert("Genre added successfully!!")
-            window.location.reload(); // Reload the page
+            setMessage("Genre added successfully!!");
           }
         }
         else{
           if(!checkIsAdmin())
-            alert("You are not admin")
+            setMessage("You are not admin");
           else
-            alert("Please log in to add genre")
+            setMessage("Please log in to add genre");
 
           localStorage.clear();
         }
       } catch (error) {
         console.error('Error:', error);
       }
-
-    // Clear the form fields
-    setGenreName('');
   };
 
   return (
-    <div className="genre-form-container">
-        <Header/>
-      <form className="genre-form" onSubmit={handleSubmit}>
-        <h2>Add New Genre</h2>
-        <div className="form-group">
-          <label>Genre Name:</label>
-          <input
-            type="text"
-            value={genreName}
-            onChange={(e) => setGenreName(e.target.value)}
-            maxLength={50}
-            required
-          />
-        </div>
-        <button type="submit">Save</button>
-      </form>
+    <div >
+      <Header/>
+      {(checkIsTokenExpired() || !checkIsAdmin()) ? 
+        <h2 style={{ textAlign: 'center' ,position:'relative',top:'30vh'}}>{errorMessage}</h2>
+      :<div className="actor-form-container">
+        <h2>Add Genre</h2>
+        <form onSubmit={handleSubmit} className="actor-form">
+          <div className="form-group">
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <p style={{ textAlign: 'center', color:'red'}}>{message}</p>
+      <button type="submit" className="submit-button">Save</button>
+    </form>
+    </div>
+    }
     </div>
   );
 };
