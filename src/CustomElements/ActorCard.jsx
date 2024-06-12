@@ -4,7 +4,7 @@ import { Navigate,Link, useParams } from "react-router-dom";
 
 export default function PersonCard({ id,name, bio, dob, gender }) {
   const [redirectToEditActor,setRedirectToEditActor] = useState(false);
-  const [redirectToLogin,setRedirectLogin] = useState(false);
+  const [redirectToHome,setRedirectHome] = useState(false);
   useEffect(()=>{
 
   },[]);
@@ -39,19 +39,24 @@ export default function PersonCard({ id,name, bio, dob, gender }) {
           else
           {
             alert("Actor Deleted successfully!!")
-            return <Navigate to="/Actors"/>
+            window.location.reload();
           }
       } catch (error) {
         console.error('Error:', error);
+        alert(error);
+        setRedirectToHome(true);
       }
     }
     else
     {
       alert("You are not admin")
-      return <Navigate to="/"/>
+      setRedirectHome(true);
     }
   }
-
+  if(redirectToHome)
+  {
+    return <Navigate to="/"/>
+  }
   if (redirectToEditActor) {
     return <Navigate to={`/Actors/${id}/Edit`} />;
   }

@@ -3,6 +3,8 @@ import { checkIsAdmin,checkIsTokenExpired } from "../TokenHandlers";
 import { Navigate,Link, useParams } from "react-router-dom";
 export default function PersonCard({ id,name, bio, dob, gender }) {
   const [redirectToEditProducer,setRedirectToEditProducer] = useState(false);
+  const [redirectToHome,setRedirectToHome] = useState(false);
+  redirectToHome
   useEffect(()=>{
 
   },[]);
@@ -37,18 +39,24 @@ export default function PersonCard({ id,name, bio, dob, gender }) {
           else
           {
             alert("Producer Deleted successfully!!")
-            return <Navigate to="/Producers"/>
+            window.location.reload();
           }
       } catch (error) {
         console.error('Error:', error);
+        alert(error);
+        setRedirectToHome(true);
       }
     }
     else
     {
-      alert("You are not admin")
+      alert("You are not admin");
+      setRedirectToHome(true);
     }
   }
-
+  if(redirectToHome)
+  {
+    return <Navigate to="/"/>
+  }
   if (redirectToEditProducer) {
     return <Navigate to={`/Producers/${id}/Edit`} />;
   }
