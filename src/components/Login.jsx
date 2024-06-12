@@ -1,6 +1,6 @@
 import "../styles.css";
 import React, { useState } from "react";
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 export default function Login() {
   const [username, setUserName] = useState('');
@@ -88,7 +88,7 @@ export default function Login() {
         </div>
         {message && <p className="message">{message}</p>}
         <p className="signup-link">
-          Don't have an account? <a href="/Signup">Sign up here</a>
+          Don't have an account? <Link to="/Signup">Sign up here</Link>
         </p>
       </form>
     </div>

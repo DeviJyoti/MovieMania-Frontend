@@ -46,7 +46,7 @@ const Header = () => {
     return (
         <header className="header">
             <div className="header-left">
-                <a href="/" className="header-title">MovieMania</a>
+                <Link to="/" className="header-title">MovieMania</Link>
             </div>
             <div className="header-center">
                 <input type="text" className="header-search" placeholder="Search movies..." />
