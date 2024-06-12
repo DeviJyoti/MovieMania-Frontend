@@ -55,7 +55,7 @@ const Header = () => {
                     <div className="header-dropdown">
                         <button className="header-dropbtn">Menu</button>
                         <div className="header-dropdown-content">
-                        <a href="/movies/Add">Add New Movie</a>
+                        <a href="/Movies/Add">Add New Movie</a>
                         <a href="/Actors/Add">Add Actors</a>
                         <a href="/Producers/Add">Add Producers</a>
                         <a href="/Genres/Add">Add Genres</a>

@@ -7,6 +7,7 @@ import Signup from "./components/Signup";
 import MovieDetails from "./components/MovieDetails";
 import AddActor from "./components/AddActor";
 import AddProducer from "./components/AddProducer";
+import AddMovie from "./components/AddMovie";
 import AddGenre from "./components/AddGenre";
 import ViewActors from "./components/ViewActors";
 import ViewProducers from "./components/ViewProducers";
@@ -23,11 +24,13 @@ export default function App() {
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Actors/Add" element={<AddActor />} />
           <Route path="/Producers/Add" element={<AddProducer />} />
+          <Route path="/Movies/Add" element={<AddMovie />} />
           <Route path="/Genres/Add" element={<AddGenre />} />
           <Route path="/Actors/:id/Edit" element={<EditActor />} />
           <Route path="/Producers/:id/Edit" element={<EditProducer />} />
           <Route path="/Actors" element={<ViewActors />} />
           <Route path="/Producers" element={<ViewProducers />} />
+          
         </Routes>
       </div>
     </Router>
