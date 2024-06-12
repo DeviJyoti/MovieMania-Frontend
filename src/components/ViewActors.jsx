@@ -24,6 +24,7 @@ const ActorsList = () => {
           if (response.ok) {
             const data = await response.json();
             setActors(data);
+            console.log(data);
           } else {
             alert("Failed to fetch actors!");
           }
@@ -66,7 +67,7 @@ const ActorsList = () => {
               id={actor.id}
               name={actor.name}
               bio={actor.bio}
-              dob={actor.dOB}
+              dob={actor.dob}
               gender={actor.gender}
             />
           ))
