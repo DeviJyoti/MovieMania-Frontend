@@ -13,6 +13,7 @@ const Header = () => {
     const [userDetails, setUserDetails] = useState(null);
     const [isTokenExpired, setIsTokenExpired] = useState(false);
     const [redirectToLogin, setRedirectToLogin] = useState(false);
+    const [redirectToHome, setRedirectToHome] = useState(false);
     useEffect(() => {
   
         if (checkIsTokenExpired()) 
@@ -37,10 +38,14 @@ const Header = () => {
     {
         return <Navigate to="/Login"/>
     }
+    if(redirectToHome)
+    {
+        return <Navigate to="/"/>
+    }
     const handleLogout = () => {
         localStorage.clear();
         setUserDetails(null);
-        return <Navigate to="/"/>
+        setRedirectToHome(true);
     };
 
     return (
