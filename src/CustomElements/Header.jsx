@@ -1,6 +1,6 @@
 // src/Header.js
 import React, { useState, useEffect } from "react";
-import { Navigate } from 'react-router-dom';
+import { Navigate,Link } from 'react-router-dom';
 import '../styles.css';
 import '../components/AddActor';
 import '../components/AddProducer';
@@ -54,16 +54,16 @@ const Header = () => {
             <div className="header-right">
                 {userDetails && userDetails.role=="Admin" && (
                     <div className="header-dropdown">
-                        <button className="header-dropbtn">Menu</button>
-                        <div className="header-dropdown-content">
-                        <a href="/Movies/Add">Add New Movie</a>
-                        <a href="/Actors/Add">Add Actors</a>
-                        <a href="/Producers/Add">Add Producers</a>
-                        <a href="/Genres/Add">Add Genres</a>
-                        <a href="/">View Movies</a>
-                        <a href="/Actors">View Actors</a>
-                        <a href="/Producers">View Producers</a>
-                        </div>
+                    <button className="header-dropbtn">Menu</button>
+                    <div className="header-dropdown-content">
+                        <Link to="/Movies/Add">Add New Movie</Link>
+                        <Link to="/Actors/Add">Add Actors</Link>
+                        <Link to="/Producers/Add">Add Producers</Link>
+                        <Link to="/Genres/Add">Add Genres</Link>
+                        <Link to="/">View Movies</Link>
+                        <Link to="/Actors">View Actors</Link>
+                        <Link to="/Producers">View Producers</Link>
+                    </div>
                     </div>
                 )}
                 {userDetails ? (
