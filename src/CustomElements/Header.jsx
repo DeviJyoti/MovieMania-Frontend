@@ -40,6 +40,7 @@ const Header = () => {
     const handleLogout = () => {
         localStorage.clear();
         setUserDetails(null);
+        window.location.reload(); 
     };
 
     return (
@@ -62,7 +63,6 @@ const Header = () => {
                         <a href="/">View Movies</a>
                         <a href="/Actors">View Actors</a>
                         <a href="/Producers">View Producers</a>
-                        <a href="/Genres">View Genres</a>
                         </div>
                     </div>
                 )}

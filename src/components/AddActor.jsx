@@ -66,12 +66,11 @@ export default function AddActor() {
           });
           
           if (!response.ok) {
-            setMessage(response);
+            setMessage("Actor Not added!!");
           }
           else
           {
-            setMessage(response);
-            window.location.reload(); // Reload the page
+            setMessage("Actor added successfully!!");
           }
         }
         else{
@@ -138,7 +137,7 @@ export default function AddActor() {
               required
             />
           </div>
-          <p style={{ textAlign: 'center', color:'red'}}>{message+"!!"}</p>
+          <p style={{ textAlign: 'center', color:'red'}}>{message}</p>
       <button type="submit" className="submit-button">Save</button>
     </form>
     </div>
