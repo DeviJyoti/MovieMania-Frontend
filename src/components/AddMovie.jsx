@@ -6,20 +6,45 @@ import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from '../TokenHand
 export default function AddMovie(){
   const [name, setName] = useState('');
   const [year, setYear] = useState('');
-  const [genre, setGenre] = useState('');
   const [plot, setPlot] = useState('');
   const [coverImage, setCoverImage] = useState('');
   const [actors, setActors] = useState([]);
   const [selectedActors, setSelectedActors] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [selectedGenres, setSelectedGenres] = useState([]);
   const [producers, setProducers] = useState([]);
   const [selectedProducer, setSelectedProducer] = useState(null);
-
+  const [message,setMessage] = useState('');
+  const [errorMessage,setErrorMessage] = useState('');
   useEffect(() => {
-    const fetchActorsAndProducers = async () => {
+    if(!checkIsLoggedIn())
+    {
+      setErrorMessage("You are not logged in")
+      return;
+    }
+
+    if(checkIsTokenExpired())
+    {
+      setErrorMessage("Your session Expired")
+      return;
+    }
+    if(!checkIsAdmin())
+    {
+      setErrorMessage("You are not admin");
+      return;
+    }
+    const fetchData = async () => {
       try {
         if (!checkIsTokenExpired()) {
           const token = localStorage.getItem('token');
           const actorResponse = await fetch('http://moviemania.runasp.net/actors', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          const genreResponse = await fetch('http://moviemania.runasp.net/genres', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,11 +59,13 @@ export default function AddMovie(){
             }
           });
 
-          if (actorResponse.ok && producerResponse.ok) {
+          if (actorResponse.ok && producerResponse.ok && genreResponse.ok) {
             const actorsData = await actorResponse.json();
             const producersData = await producerResponse.json();
+            const genresData = await genreResponse.json();
             setActors(actorsData);
             setProducers(producersData);
+            setGenres(genresData);
           } else {
             alert("Failed to fetch actors or producers!");
           }
@@ -47,11 +74,11 @@ export default function AddMovie(){
           localStorage.clear();
         }
       } catch (error) {
-        console.error('Error fetching actors or producers:', error);
+        console.error('Error fetching actors/producers/genres:', error);
       }
     };
 
-    fetchActorsAndProducers();
+    fetchData();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -60,13 +87,14 @@ export default function AddMovie(){
     const newMovie = {
       Name:name,
       YearOfRelease:year,
-      Genres:genre,
+      Genres:selectedGenres,
       Plot:plot,
       Actors: selectedActors,
       ProducerId: selectedProducer,
       CoverImage:coverImage
     };
 
+    console.log(newMovie);
     try {
       if (!checkIsTokenExpired()) {
         const token = localStorage.getItem('token');
@@ -79,46 +107,59 @@ export default function AddMovie(){
           body: JSON.stringify(newMovie)
         });
 
-        if (response.ok) {
-          alert("Movie added successfully!!");
-          window.location.reload(); // Reload the page
-        } else {
-          alert("Failed to add movie!!");
+        if (!response.ok) {
+          setMessage("Movie Not added!!");
         }
-      } else {
-        alert("Please log in to add a movie");
+        else
+        {
+          setMessage("Movie added successfully!!");
+        }
+      }
+      else{
+        if(!checkIsAdmin())
+          setMessage("You are not admin");
+        else
+          setMessage("Please log in to add genre");
+
         localStorage.clear();
       }
     } catch (error) {
       console.error('Error:', error);
     }
 
-    // Clear the form fields
-    setName('');
-    setYear('');
-    setGenre('');
-    setPlot('');
-    setCoverImage(null);
-    setSelectedActors([]);
-    setSelectedProducer(null);
-
   };
-
-  const handleActorChange = (e) => {
-
+  const handleActorChange = (e, actorId) => {
+    const isChecked = e.target.checked;
+  
+    if (isChecked) {
+      setSelectedActors((prevSelectedActors) => [...prevSelectedActors, actorId]);
+    } else {
+      setSelectedActors((prevSelectedActors) =>
+        prevSelectedActors.filter((id) => id !== actorId)
+      );
+    }
   };
-
-  const handleProducerChange = (e) => {
-
-  };
-  const handleImageChange = (e) => {
-    setCoverImage(e.target.files[0]);
+  
+  const handleGenreChange = (e,genreId) => {
+    const isChecked = e.target.checked;
+  
+    if (isChecked) {
+      setSelectedGenres((prevSelectedGenres) => [...prevSelectedGenres, genreId]);
+    } else {
+      setSelectedGenres((prevSelectedGenres) =>
+      prevSelectedGenres.filter((id) => id !== genreId)
+      );
+    }
   };
 
   return (
-    <div className="movie-form-container">
+    <div>
       <Header />
-      <h2>Add Movie</h2>
+      {(checkIsTokenExpired() || !checkIsAdmin()) ? 
+        <h2 style={{ textAlign: 'center' ,position:'relative',top:'30vh'}}>{errorMessage}</h2>
+      :<div>
+      <div className="movie-form-container">
+        <h2>Add Movie</h2>
       <form onSubmit={handleSubmit} className="movie-form">
         <div className="form-group">
           <label htmlFor="name">Movie Name:</label>
@@ -141,14 +182,32 @@ export default function AddMovie(){
           />
         </div>
         <div className="form-group">
-          <label htmlFor="genre">Genre:</label>
+          <label htmlFor="coverImage">Movie Poster URL:</label>
           <input
             type="text"
-            id="genre"
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
+            id="coverImage"
+            value={coverImage}
+            onChange={(e) => setCoverImage(e.target.value)}
             required
           />
+        </div>
+        <div className="form-group">
+          <label>Genres:</label>
+          <div className="fixed-height-container">
+            {genres.map((genre) => (
+              <div key={genre.id} className="checkbox-wrapper">
+                <input
+                  style={{display:'inline-block' , width:'25px'}}
+                  type="checkbox"
+                  id={`genre-${genre.id}`}
+                  value={genre.id}
+                  checked={selectedGenres.includes(genre.id)}
+                  onChange={(e) => handleGenreChange(e, genre.id)}
+                />
+                <label style={{display:'inline-block'}} htmlFor={`genre-${genre.id}`}>{genre.name}</label>
+              </div>
+            ))}
+          </div>
         </div>
         <div className="form-group">
           <label htmlFor="plot">Plot:</label>
@@ -156,40 +215,36 @@ export default function AddMovie(){
             id="plot"
             value={plot}
             onChange={(e) => setPlot(e.target.value)}
+            maxLength={1000}
             required
           />
-          <div className="form-group">
-          <label htmlFor="coverImage">Cover Image:</label>
-          <input
-            type="file"
-            id="coverImage"
-            onChange={handleImageChange}
-          />
-          </div>
         </div>
         <div className="form-group">
-            <label>Actors:</label>
-            <div className="fixed-height-container">
-                {actors.map((actor) => (
-                <div key={actor.id}>
-                    <input
-                    type="checkbox"
-                    id={`actor-${actor.id}`}
-                    value={actor.id}
-                    checked={selectedActors.includes(actor.id)}
-                    onChange={(e) => handleActorChange(e, actor.id)}
-                    />
-                    <label htmlFor={`actor-${actor.id}`}>{actor.name}</label>
-                </div>
-                ))}
-            </div>
-            </div>
+          <label>Actors:</label>
+          <div className="fixed-height-container">
+            {actors.map((actor) => (
+              <div key={actor.id} className="checkbox-wrapper">
+                <input
+                  style={{display:'inline-block' , width:'25px'}}
+                  type="checkbox"
+                  id={`actor-${actor.id}`}
+                  value={actor.id}
+                  checked={selectedActors.includes(actor.id)}
+                  onChange={(e) => handleActorChange(e, actor.id)}
+                />
+                <label style={{display:'inline-block'}} htmlFor={`actor-${actor.id}`}>{actor.name}</label>
+              </div>
+            ))}
+          </div>
+        </div>
+
             <div className="form-group">
             <label>Producers:</label>
             <div className="fixed-height-container">
                 {producers.map((producer) => (
                 <div key={producer.id}>
                     <input
+                    style={{display:'inline-block' , width:'25px'}}
                     type="radio"
                     id={`producer-${producer.id}`}
                     name="producer"
@@ -198,15 +253,19 @@ export default function AddMovie(){
                     onChange={(e) => setSelectedProducer(producer.id)}
                     required
                     />
-                    <label htmlFor={`producer-${producer.id}`}>{producer.name}</label>
+                    <label style={{display:'inline-block'}} htmlFor={`producer-${producer.id}`}>{producer.name}</label>
                 </div>
                 ))}
             </div>
             </div>
 
-        
+            <p style={{ textAlign: 'center'}}>{message}</p>
         <button type="submit" className="submit-button">Save</button>
       </form>
+
+      </div>
+      
+    </div>}
     </div>
   );
 };

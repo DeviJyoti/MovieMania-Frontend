@@ -1,17 +1,12 @@
 import React, { useState ,useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
 import Header from "../CustomElements/Header";
 import '../styles.css';
 import { checkIsAdmin, checkIsLoggedIn, checkIsTokenExpired } from '../TokenHandlers';
 
 export default function AddActor() {
   const [name, setName] = useState('');
-  const [dob, setDob] = useState('');
-  const [gender, setGender] = useState('');
-  const [bio, setBio] = useState('');
   const [message,setMessage] = useState('');
   const [errorMessage,setErrorMessage] = useState('');
-  const navigate = useNavigate();
 
   useEffect(()=>{
     if(!checkIsLoggedIn())
@@ -40,11 +35,6 @@ export default function AddActor() {
         return;
       }
   
-      if (bio.length > 500) {
-        setMessage('Bio must be 500 characters or less');
-        return;
-      }
-    // Create a new actor object
     const newGenre = {
       Name : name,
     };
@@ -101,7 +91,7 @@ export default function AddActor() {
               required
             />
           </div>
-          <p style={{ textAlign: 'center', color:'red'}}>{message}</p>
+          <p style={{ textAlign: 'center'}}>{message}</p>
       <button type="submit" className="submit-button">Save</button>
     </form>
     </div>
