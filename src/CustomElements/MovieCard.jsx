@@ -1,6 +1,6 @@
 import "../styles.css";
 import React from "react";
-
+import { Navigate,Link } from 'react-router-dom';
 export default function MovieCard({ id, imageURL, name, genres=[], year, plot }) {
   const truncatedName = name.length > 13 ? `${name.substring(0, 13)}...` : name;
   const truncatedPlot = plot.length > 40 ? `${plot.substring(0, 40)}...` : plot;
