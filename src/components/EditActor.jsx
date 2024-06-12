@@ -192,7 +192,7 @@ export default function AddActor() {
               required
             />
           </div>
-          <p style={{ textAlign: 'center', color:'red'}}>{message+"!!"}</p>
+          <p style={{ textAlign: 'center', color:'red'}}>{message}</p>
       <button type="submit" className="submit-button">Save</button>
     </form>
     </div>
