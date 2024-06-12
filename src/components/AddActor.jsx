@@ -88,7 +88,7 @@ export default function AddActor() {
   };
 
   return (
-    <div>
+    <div >
       <Header/>
       {(checkIsTokenExpired() || !checkIsAdmin()) ? 
         <h2 style={{ textAlign: 'center' ,position:'relative',top:'30vh'}}>{errorMessage}</h2>

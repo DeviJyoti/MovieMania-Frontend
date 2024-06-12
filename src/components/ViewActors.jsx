@@ -54,10 +54,8 @@ const ActorsList = () => {
   return (
     <div>
     <Header />
+    <h2>Actors List</h2>
     <div className="actors-list-container">
-
-      <h2>Actors List</h2>
-      <div className="actors-cards">
         {actors.length === 0 ? (
           <p>No actors found.</p>
         ) : (
@@ -73,7 +71,6 @@ const ActorsList = () => {
           ))
         )}
       </div>
-    </div>
     </div>
   );
 };

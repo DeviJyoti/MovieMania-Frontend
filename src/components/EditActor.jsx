@@ -110,7 +110,7 @@ export default function AddActor() {
         if(!checkIsTokenExpired() && checkIsAdmin())
         {
           const token = localStorage.getItem('token');
-          const response = await fetch('http://moviemania.runasp.net/actors', {
+          const response = await fetch(`http://moviemania.runasp.net/actors/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -119,14 +119,23 @@ export default function AddActor() {
             body: JSON.stringify(newActor)
           });
           
-          if (!response.ok) {
-            setMessage(response);
+          if (response.status === 400) {
+            setAllowAccess(false);
+            setErrorMessage('Bad Request');
+          } else if (response.status === 401) {
+            setAllowAccess(false);
+            setErrorMessage('Unauthorized');
+          } else if (response.status === 403) {
+            setAllowAccess(false);
+            setErrorMessage('Forbidden');
+          } else if (response.status === 404) {
+            setAllowAccess(false);
+            setErrorMessage('Not Found');
+          } else if (response.ok) {
+            setAllowAccess(true);           
+            setMessage("Actor Updated!");
           }
-          else
-          {
-            setMessage(response);
-            window.location.reload(); // Reload the page
-          }
+
         }
         else{
           if(!checkIsAdmin())
@@ -192,7 +201,7 @@ export default function AddActor() {
               required
             />
           </div>
-          <p style={{ textAlign: 'center', color:'red'}}>{message}</p>
+          <p style={{ textAlign: 'center'}}>{message}</p>
       <button type="submit" className="submit-button">Save</button>
     </form>
     </div>

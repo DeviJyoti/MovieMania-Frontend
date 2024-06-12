@@ -46,7 +46,6 @@ export default function Home() {
             </div>
         
         ) : (
-          <div className="wrapper">
           <div className="movie-flex-container">
             {allMovies.map((movie) => (
               <MovieCard
@@ -60,7 +59,6 @@ export default function Home() {
               />
             ))}
           </div>
-        </div>
         )}
         <Footer/>
     </div>
