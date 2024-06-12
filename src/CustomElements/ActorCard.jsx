@@ -25,7 +25,7 @@ export default function PersonCard({ id,name, bio, dob, gender }) {
       try {
 
           const token = localStorage.getItem('token');
-          const response = await fetch(`http://moviemania.runasp.net/actors/${id}`, {
+          const response = await fetch(`https://moviemania.runasp.net/actors/${id}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',

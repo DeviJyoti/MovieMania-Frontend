@@ -44,7 +44,7 @@ export default function AddActor() {
           if(!checkIsTokenExpired())
           {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://moviemania.runasp.net/actors/${id}`, {
+            const response = await fetch(`https://moviemania.runasp.net/actors/${id}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ export default function AddActor() {
         if(!checkIsTokenExpired() && checkIsAdmin())
         {
           const token = localStorage.getItem('token');
-          const response = await fetch(`http://moviemania.runasp.net/actors/${id}`, {
+          const response = await fetch(`https://moviemania.runasp.net/actors/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

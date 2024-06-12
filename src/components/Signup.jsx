@@ -44,7 +44,7 @@ export default function Signup() {
 
       try {
         // Make a POST request to the API endpoint using fetch
-        const response = await fetch('http://moviemania.runasp.net/authentication/Register',
+        const response = await fetch('https://moviemania.runasp.net/authentication/Register',
         {
           method: 'POST',
           headers: {

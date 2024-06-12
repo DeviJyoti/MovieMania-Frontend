@@ -16,7 +16,7 @@ export default function MovieDetails() {
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        const response = await fetch(`http://moviemania.runasp.net/movies/${id}`, {
+        const response = await fetch(`https://moviemania.runasp.net/movies/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ export default function MovieDetails() {
         if(!checkIsTokenExpired())
         {
           const token = localStorage.getItem('token');
-          const response = await fetch(`http://moviemania.runasp.net/movies/${id}/reviews`, {
+          const response = await fetch(`https://moviemania.runasp.net/movies/${id}/reviews`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export default function MovieDetails() {
       if(!checkIsTokenExpired())
       {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://moviemania.runasp.net/reviews', {
+        const response = await fetch('https://moviemania.runasp.net/reviews', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

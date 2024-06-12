@@ -14,7 +14,7 @@ const ActorsList = () => {
       try {
         if (!checkIsTokenExpired()) {
           const token = localStorage.getItem('token');
-          const response = await fetch('http://moviemania.runasp.net/actors', {
+          const response = await fetch('https://moviemania.runasp.net/actors', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

@@ -37,21 +37,21 @@ export default function AddMovie(){
       try {
         if (!checkIsTokenExpired()) {
           const token = localStorage.getItem('token');
-          const actorResponse = await fetch('http://moviemania.runasp.net/actors', {
+          const actorResponse = await fetch('https://moviemania.runasp.net/actors', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`
             }
           });
-          const genreResponse = await fetch('http://moviemania.runasp.net/genres', {
+          const genreResponse = await fetch('https://moviemania.runasp.net/genres', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`
             }
           });
-          const producerResponse = await fetch('http://moviemania.runasp.net/producers', {
+          const producerResponse = await fetch('https://moviemania.runasp.net/producers', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ export default function AddMovie(){
     try {
       if (!checkIsTokenExpired()) {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://moviemania.runasp.net/movies', {
+        const response = await fetch('https://moviemania.runasp.net/movies', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

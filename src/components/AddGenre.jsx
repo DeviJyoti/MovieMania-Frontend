@@ -43,7 +43,7 @@ export default function AddActor() {
         if(!checkIsTokenExpired() && checkIsAdmin())
         {
           const token = localStorage.getItem('token');
-          const response = await fetch('http://moviemania.runasp.net/genres', {
+          const response = await fetch('https://moviemania.runasp.net/genres', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

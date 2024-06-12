@@ -44,7 +44,7 @@ export default function AddProducer() {
           if(!checkIsTokenExpired())
           {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://moviemania.runasp.net/producers/${id}`, {
+            const response = await fetch(`https://moviemania.runasp.net/producers/${id}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ export default function AddProducer() {
         if(!checkIsTokenExpired() && checkIsAdmin())
         {
           const token = localStorage.getItem('token');
-          const response = await fetch(`http://moviemania.runasp.net/producers/${id}`, {
+          const response = await fetch(`https://moviemania.runasp.net/producers/${id}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

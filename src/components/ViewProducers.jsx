@@ -14,7 +14,7 @@ const ProducersList = () => {
       try {
         if (!checkIsTokenExpired()) {
           const token = localStorage.getItem('token');
-          const response = await fetch('http://moviemania.runasp.net/producers', {
+          const response = await fetch('https://moviemania.runasp.net/producers', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
