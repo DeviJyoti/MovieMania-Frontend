@@ -45,7 +45,8 @@ const Header = () => {
     const handleLogout = () => {
         localStorage.clear();
         setUserDetails(null);
-        setRedirectToHome(true);
+        window.location.href = '/';
+        // setRedirectToHome(true);
     };
 
     return (
