@@ -4,7 +4,7 @@ import Header from "../CustomElements/Header";
 import { Navigate,Link } from 'react-router-dom';
 
 export default function Home() {
-  const [allMovies, setAllMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState(null);
   const [info, setInfo] = useState("");
 
   useEffect(() => {
@@ -40,12 +40,27 @@ export default function Home() {
     <div>
       <Header />
       <pre>{info}</pre>
-        {allMovies.length === 0 ? (
-          <div>
-              <h1 style={{margin:'auto',textAlign:'center', marginTop:'30vh'}}>Loading...</h1>
-          </div>
+
+
+      {!allMovies ? (
+  <h1 style={{margin:'auto',textAlign:'center', marginTop:'30vh'}}>No Movies found</h1>
+) : allMovies.length === 0 ? (
+  <h1 style={{margin:'auto',textAlign:'center', marginTop:'30vh'}}>Loading...</h1>
+) 
+//         : (
+//   // Render your movies here when allMovies has data
+//   <MoviesList movies={allMovies} />
+// )}
+
+      
+//         {allMovies.length === 0 || allMovies==null? (
+//           <div>
+//             {allMovies.length === 0 && <h1 style={{margin:'auto',textAlign:'center', marginTop:'30vh'}}>Loading...</h1>
+//               allMovies == null && <h1 style={{margin:'auto',textAlign:'center', marginTop:'30vh'}}>No Movies found</h1>
+//           </div>
         
-        ) : (
+//         ) 
+          : (
           <div className="movie-flex-container">
             {allMovies.map((movie) => (
               <MovieCard
